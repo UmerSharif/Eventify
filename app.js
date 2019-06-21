@@ -66,10 +66,11 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${
       process.env.MONGO_PASSWORD
-    }@cluster0-hhine.mongodb.net/test?retryWrites=true&w=majority`
+    }@cluster0-hhine.mongodb.net/test?retryWrites=true&w=majority`,
+    { useNewUrlParser: true }
   )
   .then(() => {
-    app.listen(5000);
+    app.listen(3000);
   })
   .catch(err => {
     console.log(err);
