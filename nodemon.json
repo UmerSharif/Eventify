@@ -1,6 +1,7 @@
 {
   "env": {
     "MONGO_USER": "umer",
-    "MONGO_PASSWORD": "RrfmjxoHNA7OMtny"
+    "MONGO_PASSWORD": "RrfmjxoHNA7OMtny",
+    "MONGO_DB": "my-eventdb"
   }
 }

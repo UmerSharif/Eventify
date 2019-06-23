@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql");
 const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
+
+const Event = require("./models/event");
 const app = express();
 const events = [];
 app.use(bodyParser.json());
@@ -42,11 +44,42 @@ app.use(
     `),
     rootValue: {
       events: () => {
-        return events;
+        //testing without mongodb
+        // return events;
+
+        return Event.find()
+          .then(events => {
+            return events.map(event => {
+              console.log(event);
+              return { ...event._doc, _id: event._doc._id.toString() }; // replace the original id with the new string id
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            throw err;
+          });
       },
 
       createEvent: args => {
-        const event = {
+        const event = new Event({
+          title: args.eventInput.title,
+          description: args.eventInput.description,
+          price: +args.eventInput.price,
+          date: new Date(args.eventInput.date)
+        });
+        return event
+          .save()
+          .then(result => {
+            console.log(result);
+            return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
+          })
+          .catch(err => {
+            console.log(err);
+            throw err;
+          });
+
+        //testing
+        /*  const event = {
           _id: Math.random().toString(),
           title: args.eventInput.title,
           description: args.eventInput.description,
@@ -55,7 +88,7 @@ app.use(
         };
         console.log(event);
         events.push(event);
-        return event;
+        return event; */
       }
     },
     graphiql: true
@@ -66,7 +99,9 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${
       process.env.MONGO_PASSWORD
-    }@cluster0-hhine.mongodb.net/test?retryWrites=true&w=majority`,
+    }@cluster0-hhine.mongodb.net/${
+      process.env.MONGO_DB
+    }?retryWrites=true&w=majority`,
     { useNewUrlParser: true }
   )
   .then(() => {
