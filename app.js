@@ -78,7 +78,8 @@ app.use(
           title: args.eventInput.title,
           description: args.eventInput.description,
           price: +args.eventInput.price,
-          date: new Date(args.eventInput.date)
+          date: new Date(args.eventInput.date),
+          creator: "5d13570970fcd3273482e7fe"
         });
         return event
           .save()
