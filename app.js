@@ -81,20 +81,24 @@ app.use(
           date: new Date(args.eventInput.date),
           creator: "5d13570970fcd3273482e7fe"
         });
+        let createdEvent;
         return event
           .save()
           .then(result => {
-            return User.findById("5d13570970fcd3273482e7fe")
+            createdEvent = { ...result._doc, _id: result._doc._id.toString() };
+            return User.findById("5d13570970fcd3273482e7fe");
             console.log(result);
-            return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
-          }).then(user => {
-            if (user) {
-              throw new Error("yo dude, the dude man already exist");
+            //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
+          })
+          .then(user => {
+            if (!user) {
+              throw new Error("yo dude, the dude man is another planet");
             }
-            user.createdEvents.push(event)
+            user.createdEvents.push(event);
             return user.save();
-          }).then(result =>{
-            
+          })
+          .then(result => {
+            return createdEvent;
           })
           .catch(err => {
             console.log(err);
