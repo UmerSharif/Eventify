@@ -84,8 +84,17 @@ app.use(
         return event
           .save()
           .then(result => {
+            return User.findById("5d13570970fcd3273482e7fe")
             console.log(result);
             return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
+          }).then(user => {
+            if (user) {
+              throw new Error("yo dude, the dude man already exist");
+            }
+            user.createdEvents.push(event)
+            return user.save();
+          }).then(result =>{
+            
           })
           .catch(err => {
             console.log(err);
