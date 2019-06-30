@@ -63,6 +63,7 @@ app.use(
         // return events;
 
         return Event.find()
+          .populate("creator")
           .then(events => {
             return events.map(event => {
               console.log(event);
@@ -81,14 +82,14 @@ app.use(
           description: args.eventInput.description,
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
-          creator: "5d188fc1306a1e2b70ae1801"
+          creator: "5d18a46fcf7e5c2d08f4860a"
         });
         let createdEvent;
         return event
           .save()
           .then(result => {
             createdEvent = { ...result._doc, _id: result._doc._id.toString() };
-            return User.findById("5d188fc1306a1e2b70ae1801");
+            return User.findById("5d18a46fcf7e5c2d08f4860a");
             console.log(result);
             //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
           })
