@@ -10,6 +10,16 @@ const app = express();
 const events = [];
 app.use(bodyParser.json());
 
+const user = userId => {
+  return User.findById(userId)
+    .then(user => {
+      return { ...user._doc, _id: user.id };
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
 app.use(
   "/graphql",
   graphqlHttp({
