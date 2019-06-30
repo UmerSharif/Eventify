@@ -20,13 +20,15 @@ app.use(
         title: String!
         description: String!
         price: Float!
-        date: String! 
+        date: String!
+        creator: User! 
     }
 
     type User {
       _id: ID!
       email: String!
       password: String
+      createdEvents: [Event!]
     }
 
     input EventInput {
@@ -79,20 +81,20 @@ app.use(
           description: args.eventInput.description,
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
-          creator: "5d13570970fcd3273482e7fe"
+          creator: "5d188fc1306a1e2b70ae1801"
         });
         let createdEvent;
         return event
           .save()
           .then(result => {
             createdEvent = { ...result._doc, _id: result._doc._id.toString() };
-            return User.findById("5d13570970fcd3273482e7fe");
+            return User.findById("5d188fc1306a1e2b70ae1801");
             console.log(result);
             //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
           })
           .then(user => {
             if (!user) {
-              throw new Error("yo dude, the dude man is another planet");
+              throw new Error("yo dude, the dude man is on another planet");
             }
             user.createdEvents.push(event);
             return user.save();
