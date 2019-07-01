@@ -7,13 +7,34 @@ const User = require("./models/user");
 const Event = require("./models/event");
 const bcrypt = require("bcryptjs");
 const app = express();
-const events = [];
+//const events = []; testing
 app.use(bodyParser.json());
+
+const events = eventIds => {
+  return Event.find({ _id: { $in: eventIds } })
+    .then(events => {
+      events.map(event => {
+        //fix created null bug
+        return {
+          ...event._doc,
+          _id: event.id,
+          creator: user.bind(this, event.creator)
+        };
+      });
+    })
+    .catch(err => {
+      throw err;
+    });
+};
 
 const user = userId => {
   return User.findById(userId)
     .then(user => {
-      return { ...user._doc, _id: user.id };
+      return {
+        ...user._doc,
+        _id: user.id,
+        createdEvents: events.bind(this, user._doc.createdEvents)
+      };
     })
     .catch(err => {
       throw err;
@@ -81,7 +102,7 @@ app.use(
                 ...event._doc,
                 _id: event._doc._id.toString(), // replace the original id with the new string id
                 creator: user.bind(this, event._doc.creator)
-                // creator: { // use function instead
+                // creator: { // use function instead of this (above)
                 //   ...event._doc.creator._doc,
                 //   _id: event._doc.creator.id // replace the original id with the new string id, without using to string provided by mongoose
                 // }
