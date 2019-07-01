@@ -73,17 +73,18 @@ app.use(
         // return events;
 
         return Event.find()
-          .populate("creator")
+
           .then(events => {
             return events.map(event => {
               console.log(event);
               return {
                 ...event._doc,
                 _id: event._doc._id.toString(), // replace the original id with the new string id
-                creator: {
-                  ...event._doc.creator._doc,
-                  _id: event._doc.creator.id // replace the original id with the new string id, without using to string provided by mongoose
-                }
+                creator: user.bind(this, event._doc.creator)
+                // creator: { // use function instead
+                //   ...event._doc.creator._doc,
+                //   _id: event._doc.creator.id // replace the original id with the new string id, without using to string provided by mongoose
+                // }
               };
             });
           })
