@@ -14,7 +14,6 @@ const events = eventIds => {
   return Event.find({ _id: { $in: eventIds } })
     .then(events => {
       return events.map(event => {
-        //fix created null bug
         return {
           ...event._doc,
           _id: event.id,
