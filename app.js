@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const events = eventIds => {
   return Event.find({ _id: { $in: eventIds } })
     .then(events => {
-      events.map(event => {
+      return events.map(event => {
         //fix created null bug
         return {
           ...event._doc,
