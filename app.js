@@ -126,7 +126,7 @@ app.use(
         return event
           .save()
           .then(result => {
-            createdEvent = { ...result._doc, _id: result._doc._id.toString() };
+            createdEvent = { ...result._doc, _id: result._doc._id.toString(), creator: user.bind(this, result._doc.creator) };
             return User.findById("5d18a46fcf7e5c2d08f4860a");
             console.log(result);
             //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
