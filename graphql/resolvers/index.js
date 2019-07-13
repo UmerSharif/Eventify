@@ -77,15 +77,15 @@ module.exports = {
         date: new Date(event._doc.date).toISOString(),
         creator: user.bind(this, result._doc.creator)
       };
-      const user = await User.findById("5d18a46fcf7e5c2d08f4860a");
+      const creatorUser = await User.findById("5d18a46fcf7e5c2d08f4860a");
       console.log(result);
       //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
 
-      if (!user) {
+      if (!creatorUser) {
         throw new Error("yo dude, the dude man is on another planet");
       }
-      user.createdEvents.push(event);
-      await user.save();
+      creatorUser.createdEvents.push(event);
+      await creatorUser.save();
 
       return createdEvent;
     } catch (err) {
