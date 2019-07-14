@@ -20,6 +20,8 @@ const events = async eventIds => {
   }
 };
 
+const singleEvent = async eventId => {};
+
 const user = async userId => {
   try {
     const user = await User.findById(userId);
@@ -145,5 +147,20 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  bookEvent: async args => {
+    const fetchedEvent = await Event.findOne({ _id: args.eventId });
+    const booking = new Booking({
+      user: "5d18a46fcf7e5c2d08f4860a",
+      event: fetchedEvent
+    });
+
+    const result = await booking.save();
+    return {
+      ...result._doc,
+      _id: result.id,
+      createdAt: new Date(result._doc.createdAt).toISOString(),
+      updatedAt: new Date(result._doc.updatedAt).toISOString()
+    };
   }
 };
