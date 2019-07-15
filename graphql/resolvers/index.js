@@ -177,5 +177,22 @@ module.exports = {
       event: singleEvent.bind(this, booking._doc.event), // using event id stored in booking
       user: user.bind(this, booking._doc.user) // using user id stored in booking
     };
+  },
+
+  cancelBooking: async args => {
+    try {
+      const fectchBooking = await Booking.findById(args.bookingId).populate(
+        "event"
+      );
+      const event = {
+        ...fectchBooking.event._doc,
+        _id: fectchBooking.event.id,
+        creator: user.bind(this, fectchBooking.event._doc.creator)
+      };
+      await Booking.deleteOne({ _id: args.bookingId });
+      return event;
+    } catch (err) {
+      throw err;
+    }
   }
 };
