@@ -3,17 +3,21 @@ const Event = require("../../models/event");
 const Booking = require("../../models/booking");
 const bcrypt = require("bcryptjs");
 
+const transformEvent = event => {
+  return {
+    ...event._doc,
+    _id: event.id,
+    date: new Date(event._doc.date).toISOString(),
+    creator: user.bind(this, event.creator)
+  };
+};
+
 const events = async eventIds => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
 
     return events.map(event => {
-      return {
-        ...event._doc,
-        _id: event.id,
-        date: new Date(event._doc.date).toISOString(),
-        creator: user.bind(this, event.creator)
-      };
+      return transformEvent(event);
     });
   } catch (err) {
     throw err;
@@ -23,11 +27,7 @@ const events = async eventIds => {
 const singleEvent = async eventId => {
   try {
     const singleEvent = await Event.findById(eventId);
-    return {
-      ...singleEvent._doc,
-      _id: singleEvent.id,
-      creator: user.bind(this, singleEvent.creator)
-    };
+    return transformEvent(singleEvent);
   } catch (err) {
     throw err;
   }
@@ -56,16 +56,7 @@ module.exports = {
 
       return events.map(event => {
         console.log(event);
-        return {
-          ...event._doc,
-          _id: event._doc._id.toString(), // replace the original id with the new string id
-          date: new Date(event._doc.date).toISOString(),
-          creator: user.bind(this, event._doc.creator)
-          // creator: { // use function instead of this (above)
-          //   ...event._doc.creator._doc,
-          //   _id: event._doc.creator.id // replace the original id with the new string id, without using to string provided by mongoose
-          // }
-        };
+        return transformEvent(event);
       });
     } catch (err) {
       console.log(err);
