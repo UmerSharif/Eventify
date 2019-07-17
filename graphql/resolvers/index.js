@@ -97,12 +97,7 @@ module.exports = {
     try {
       const result = await event.save();
 
-      createdEvent = {
-        ...result._doc,
-        _id: result._doc._id.toString(),
-        date: new Date(event._doc.date).toISOString(),
-        creator: user.bind(this, result._doc.creator)
-      };
+      createdEvent = transformEvent(result);
       const creatorUser = await User.findById("5d18a46fcf7e5c2d08f4860a");
       console.log(result);
       //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
@@ -175,11 +170,7 @@ module.exports = {
       const fectchBooking = await Booking.findById(args.bookingId).populate(
         "event"
       );
-      const event = {
-        ...fectchBooking.event._doc,
-        _id: fectchBooking.event.id,
-        creator: user.bind(this, fectchBooking.event._doc.creator)
-      };
+      const event = transformEvent(fectchBooking.event);
       await Booking.deleteOne({ _id: args.bookingId });
       return event;
     } catch (err) {
