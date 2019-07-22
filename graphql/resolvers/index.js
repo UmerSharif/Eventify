@@ -3,6 +3,8 @@ const Event = require("../../models/event");
 const Booking = require("../../models/booking");
 const bcrypt = require("bcryptjs");
 
+const {} = require("../../helpers/date");
+
 const transformEvent = event => {
   return {
     ...event._doc,
