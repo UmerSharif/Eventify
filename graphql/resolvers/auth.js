@@ -1,5 +1,6 @@
 const User = require("../../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   createUser: async args => {
@@ -23,7 +24,24 @@ module.exports = {
       throw err;
     }
   },
-  login: async args => {
-    //args can also be retrieved by desctructuring {(email, password)} instead of writing args
+  login: async ({ email, password }) => {
+    //args or can also be retrieved by desctructuring ({email, password})instead of writing args
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error("user does not exist and go to hell");
+    }
+    const isEqual = await bcrypt.compare(password, user.password);
+
+    if (!isEqual) {
+      throw new Error("Password is incorrect");
+    }
+
+    const token = await jwt.sign(
+      { userId: user.id, email: user.email },
+      "thanosasskey",
+      { expiresIn: "1h" }
+    );
+
+    return { userId: user.id, token: token, tokenExpiration: 1 };
   }
 };
