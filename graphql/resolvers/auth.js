@@ -22,5 +22,8 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  login: async args => {
+    //args can also be retrieved by desctructuring {(email, password)} instead of writing args
   }
 };
