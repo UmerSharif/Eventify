@@ -6,7 +6,10 @@ const { transformBooking, transformEvent } = require("./merge");
 module.exports = {
   //book Event resolvers
 
-  bookings: async () => {
+  bookings: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Authorization failed for getting bookings...");
+    }
     try {
       const bookings = await Booking.find();
       return bookings.map(booking => {
@@ -17,10 +20,13 @@ module.exports = {
     }
   },
 
-  bookEvent: async args => {
+  bookEvent: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Authorization failed for book event...");
+    }
     const fetchedEvent = await Event.findOne({ _id: args.eventId });
     const booking = new Booking({
-      user: "5d18a46fcf7e5c2d08f4860a",
+      user: req.userId,
       event: fetchedEvent
     });
 
@@ -28,7 +34,10 @@ module.exports = {
     return transformBooking(result);
   },
 
-  cancelBooking: async args => {
+  cancelBooking: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Authorization failed...");
+    }
     try {
       const fectchBooking = await Booking.findById(args.bookingId).populate(
         "event"
