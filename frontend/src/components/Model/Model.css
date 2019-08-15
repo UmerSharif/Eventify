@@ -1,0 +1,38 @@
+.model {
+  width: 90%;
+  background: #f1eeee;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.26);
+  position: fixed;
+  top: 20vh;
+  left: 5%;
+  border-radius: 3px;
+}
+
+.model__header {
+  padding: 1rem;
+  background: #0b8076;
+  border-radius: 3px;
+}
+
+.model__header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #f1eeee;
+}
+
+.model__content {
+  padding: 1rem;
+}
+
+.model__actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .model {
+    width: 32rem;
+    left: calc((100% - 32rem) / 2);
+  }
+}

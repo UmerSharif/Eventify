@@ -93,21 +93,23 @@ class Auth extends Component {
       <form className="auth-form" onSubmit={this.submitHandler}>
         <div className="form-control">
           <h4>{this.state.infoText ? "Sign in" : "Sign up"}</h4>
-          <label htmlFor="email">Email</label>
+          {/* <label htmlFor="email">Email</label> */}
           <input
             type="email"
             autoComplete="username"
             id="email"
             ref={this.emailEl}
+            placeholder="Enter Email"
           />
         </div>
         <div className="form-control">
-          <label htmlFor="password">Password</label>
+          {/* <label htmlFor="password">Password</label> */}
           <input
             type="password"
             autoComplete="current-password"
             id="password"
             ref={this.passwordEl}
+            placeholder="Enter Password"
           />
         </div>
         <div className="form-action">

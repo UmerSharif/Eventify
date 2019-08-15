@@ -52,6 +52,11 @@ class App extends React.Component {
                 {this.state.token && (
                   <Route path="/bookings" component={BookingPage} />
                 )}
+                {/* my change */}
+
+                {!this.state.token && (
+                  <Redirect from="/bookings" to="/auth" exact />
+                )}
               </Switch>
             </main>
           </AuthContext.Provider>

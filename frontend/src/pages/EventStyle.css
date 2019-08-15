@@ -1,7 +1,12 @@
-.auth-form {
-  width: 25rem;
+.event-control {
+  text-align: center;
+  border: 1px solid #b3b0b0;
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 30rem;
   max-width: 80%;
-  margin: 5rem auto;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  background: #f1eeee;
 }
 
 .form-control label,
@@ -29,7 +34,8 @@
   outline: none;
 }
 
-.form-action button {
+.form-action button,
+.btn {
   margin-right: 1rem;
   padding: 0.3rem 1rem;
   font: inherit;
@@ -42,7 +48,10 @@
 }
 
 .form-action button:hover,
-.form-action button:active {
+.form-action button:active,
+.btn:hover,
+.btn:active,
+.btn:focus {
   background: #c21989;
   border: 1px solid #c21989;
   outline: #c21989;
