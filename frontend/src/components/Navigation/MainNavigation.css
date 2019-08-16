@@ -53,3 +53,15 @@
   color: #08878b;
   outline: #08878b;
 }
+
+.main-navigation__logo p {
+  font-family: "Bubblegum Sans", cursive;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 3s;
+}
+
+.main-navigation__logo p:hover {
+  font-size: 1.5rem;
+  transform: rotate(1080deg);
+}

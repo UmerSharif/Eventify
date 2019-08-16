@@ -96,7 +96,7 @@ class Auth extends Component {
           {/* <label htmlFor="email">Email</label> */}
           <input
             type="email"
-            autoComplete="username"
+            autoComplete="email"
             id="email"
             ref={this.emailEl}
             placeholder="Enter Email"

@@ -12,7 +12,7 @@ const MainNavigation = props => (
       return (
         <header className="main-navigation">
           <div className="main-navigation__logo">
-            <h3 style={{ color: "blanchedalmond" }}>EventManager</h3>
+            <p style={{ color: "blanchedalmond" }}>Eventify</p>
           </div>
           <nav className="main-navigation__items">
             <ul>

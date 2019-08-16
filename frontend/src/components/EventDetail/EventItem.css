@@ -1,0 +1,45 @@
+.event_list_item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #b3b0b0;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  background: #f1eeee;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* button */
+
+.event_list_item button,
+.btn {
+  margin-right: 1rem;
+  padding: 0.3rem 1rem;
+  font: inherit;
+  background: #0b8076;
+  border: 1px solid #0b8076;
+  border-radius: 3px;
+  color: rgb(245, 235, 222);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+}
+
+.event_list_item button:hover,
+.event_list_item button:active,
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background: #c21989;
+  border: 1px solid #c21989;
+  outline: #c21989;
+}
+
+/* h element */
+.event_list_item h3 {
+  margin: 0;
+  color: #0b8076;
+}
+
+.event_list_item h4 {
+  color: #5f5c5c;
+  margin: 0;
+}
