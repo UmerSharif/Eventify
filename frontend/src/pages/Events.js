@@ -5,6 +5,7 @@ import Model from "../components/Model/Model";
 import Backdrop from "../components/Backdrop/Backdrop";
 import AuthContext from "../context/auth-context";
 import EventList from "../components/EventDetail/EventList";
+import EventLoadingSpinner from "../components/Spinners/EventLoadingSpinner";
 
 export default class Events extends Component {
   static contextType = AuthContext;
@@ -13,6 +14,7 @@ export default class Events extends Component {
 
     this.state = {
       isModel: false,
+      isLoading: false,
       events: []
     };
 
@@ -67,10 +69,6 @@ export default class Events extends Component {
               description
               price
               date
-              creator {
-                _id
-                email
-              }
           }
         }
         `
@@ -93,7 +91,20 @@ export default class Events extends Component {
         return res.json();
       })
       .then(resData => {
-        this.loadEvents();
+        this.setState(prevState => {
+          const updatedEvents = [...prevState.events];
+          updatedEvents.push({
+            _id: resData.data.createEvent._id,
+            title: resData.data.createEvent.title,
+            description: resData.data.createEvent.description,
+            price: resData.data.createEvent.price,
+            date: resData.data.createEvent.date,
+            creator: {
+              _id: this.context.userId
+            }
+          });
+          return { events: updatedEvents };
+        });
       })
       .catch(err => {
         console.log(err);
@@ -101,6 +112,7 @@ export default class Events extends Component {
   };
 
   loadEvents() {
+    this.setState({ isLoading: true });
     const requestBody = {
       query: `
           query {
@@ -136,10 +148,12 @@ export default class Events extends Component {
       })
       .then(resData => {
         const eventdata = resData.data.events;
-        this.setState({ events: eventdata });
+        this.setState({ events: eventdata, isLoading: false });
+        console.log(eventdata);
       })
       .catch(err => {
         console.log(err);
+        this.setState({ isLoading: false });
       });
   }
   render() {
@@ -211,7 +225,12 @@ export default class Events extends Component {
             </button>
           </div>
         )}
-        <EventList events={this.state.events} />
+        {this.state.isLoading ? (
+          <EventLoadingSpinner />
+        ) : (
+          <EventList events={this.state.events} />
+        )}
+        {/* (logged in information can also be paased from contex here, like this.context.userId) */}
       </React.Fragment>
     );
   }

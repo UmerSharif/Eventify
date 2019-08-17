@@ -4,7 +4,14 @@ import EventItem from "./EventItem";
 
 export default function EventList(props) {
   const events = props.events.map(event => {
-    return <EventItem eventId={event._id} title={event.title} />;
+    return (
+      <EventItem
+        eventId={event._id}
+        title={event.title}
+        key={event._id}
+        creatorId={event.creator._id}
+      />
+    );
   });
   return (
     <div>

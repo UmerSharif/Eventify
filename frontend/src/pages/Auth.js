@@ -27,7 +27,7 @@ class Auth extends Component {
     e.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
-    console.log(password);
+    // console.log(password);
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;

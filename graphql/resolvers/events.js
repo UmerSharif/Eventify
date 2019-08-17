@@ -10,9 +10,9 @@ module.exports = {
     // return events;
     try {
       const events = await Event.find();
-      console.log("new events stuff" + events);
+      // console.log("new events stuff" + events);
       return events.map(event => {
-        console.log("sup" + event);
+        // console.log("sup" + event);
         return transformEvent(event);
       });
     } catch (err) {
@@ -39,7 +39,7 @@ module.exports = {
 
       createdEvent = transformEvent(result);
       const creatorUser = await User.findById(req.userId);
-      console.log(result);
+      // console.log(result);
       //return { ...result._doc, _id: result._doc._id.toString() }; // replace the original id with the new string id
 
       if (!creatorUser) {
