@@ -197,6 +197,7 @@ export default class Events extends Component {
             canConfirm
             onCancel={this.cancelModelHandler}
             onConfirm={this.confirmModelHandler}
+            confirmText="Confirm"
           >
             <form className="event__form">
               <div className="form-control">
@@ -267,6 +268,7 @@ export default class Events extends Component {
             date={this.state.selectedEventOnclick.date}
             description={this.state.selectedEventOnclick.description}
             onCancel={this.cancelViewDetailModel}
+            confirmText="Book"
           />
         )}
       </React.Fragment>

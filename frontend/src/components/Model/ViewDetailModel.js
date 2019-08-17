@@ -27,7 +27,7 @@ export default function ViewDetailModel(props) {
         </button>
 
         <button className="btn" onClick={props.onConfirm}>
-          Confirm
+          {props.confirmText}
         </button>
       </section>
     </div>
