@@ -6,6 +6,7 @@ import Backdrop from "../components/Backdrop/Backdrop";
 import AuthContext from "../context/auth-context";
 import EventList from "../components/EventDetail/EventList";
 import EventLoadingSpinner from "../components/Spinners/EventLoadingSpinner";
+import ViewDetailModel from "../components/Model/ViewDetailModel";
 
 export default class Events extends Component {
   static contextType = AuthContext;
@@ -14,8 +15,10 @@ export default class Events extends Component {
 
     this.state = {
       isModel: false,
+      isViewDetailModel: false,
       isLoading: false,
-      events: []
+      events: [],
+      selectedEventOnclick: null
     };
 
     this.titleEl = React.createRef();
@@ -29,14 +32,23 @@ export default class Events extends Component {
   componentDidMount() {
     this.loadEvents();
   }
-
+  //form submission model
   toggleModel = () => {
-    this.setState({ isModel: !this.state.isModel });
+    this.setState({
+      isModel: !this.state.isModel
+    });
   };
-
   cancelModelHandler = () => {
     this.setState({ isModel: !this.state.isModel });
   };
+
+  cancelViewDetailModel = () => {
+    this.setState({
+      isViewDetailModel: !this.state.isViewDetailModel,
+      selectedEventOnclick: null
+    });
+  };
+
   confirmModelHandler = e => {
     e.preventDefault();
     this.setState({ isModel: !this.state.isModel });
@@ -156,6 +168,16 @@ export default class Events extends Component {
         this.setState({ isLoading: false });
       });
   }
+
+  viewDetailHandler = eventId => {
+    this.setState(prevState => {
+      const selectedEventOnclick = prevState.events.find(event => {
+        return event._id === eventId;
+      });
+      return { selectedEventOnclick: selectedEventOnclick };
+    });
+    this.setState({ isViewDetailModel: !this.state.isViewDetailModel });
+  };
   render() {
     // const eventList = this.state.events.map(event => {
     //   return (
@@ -166,6 +188,7 @@ export default class Events extends Component {
     // });
     return (
       <React.Fragment>
+        {this.state.isViewDetailModel && <Backdrop />}
         {this.state.isModel && <Backdrop />}
         {this.state.isModel && (
           <Model
@@ -228,9 +251,24 @@ export default class Events extends Component {
         {this.state.isLoading ? (
           <EventLoadingSpinner />
         ) : (
-          <EventList events={this.state.events} />
+          <EventList
+            events={this.state.events}
+            onDetailToEvents={this.viewDetailHandler}
+          />
         )}
         {/* (logged in information can also be paased from contex here, like this.context.userId) */}
+
+        {/* //ViewDetailModel */}
+
+        {this.state.selectedEventOnclick && (
+          <ViewDetailModel
+            title={this.state.selectedEventOnclick.title}
+            price={this.state.selectedEventOnclick.price}
+            date={this.state.selectedEventOnclick.date}
+            description={this.state.selectedEventOnclick.description}
+            onCancel={this.cancelViewDetailModel}
+          />
+        )}
       </React.Fragment>
     );
   }
