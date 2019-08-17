@@ -10,6 +10,8 @@ export default function EventList(props) {
         title={event.title}
         key={event._id}
         creatorId={event.creator._id}
+        eventDate={new Date(event.date).toLocaleDateString()}
+        eventPrice={event.price}
       />
     );
   });

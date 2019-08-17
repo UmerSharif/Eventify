@@ -11,7 +11,8 @@ const EventItem = props => (
           <li className="event_list_item" key={props.eventId}>
             <div>
               <h3>{props.title}</h3>
-              <h4>$99.99</h4>
+              <h4>${props.eventPrice}</h4>
+              <h4>{props.eventDate}</h4>
             </div>
             <div>
               {context.userId === props.creatorId ? (
