@@ -178,6 +178,54 @@ export default class Events extends Component {
     });
     this.setState({ isViewDetailModel: !this.state.isViewDetailModel });
   };
+
+  bookEventHandler = () => {
+    if (!this.context.token) {
+      this.setState({
+        selectedEventOnclick: null,
+        isViewDetailModel: !this.state.isViewDetailModel
+      });
+      return;
+    }
+    const requestBody = {
+      query: `
+          mutation {
+            bookEvent(eventId: "${this.state.selectedEventOnclick._id}") {
+              _id
+              createdAt
+              updatedAt
+            
+          }
+        }
+        `
+    };
+
+    // create user mutation
+    const token = this.context.token;
+    fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Operation Failed.. Suck it bitch :D");
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState({
+          isViewDetailModel: !this.state.isViewDetailModel,
+          selectedEventOnclick: null
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   render() {
     // const eventList = this.state.events.map(event => {
     //   return (
@@ -268,7 +316,8 @@ export default class Events extends Component {
             date={this.state.selectedEventOnclick.date}
             description={this.state.selectedEventOnclick.description}
             onCancel={this.cancelViewDetailModel}
-            confirmText="Book"
+            confirmText={this.context.token ? "Book" : "LogIn to Book Event "}
+            onConfirm={this.bookEventHandler}
           />
         )}
       </React.Fragment>

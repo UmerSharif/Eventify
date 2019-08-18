@@ -10,7 +10,7 @@ export default function ViewDetailModel(props) {
       <section className="model__content">
         <h3>
           <p style={{ color: "#0b8076" }}> Event Type : </p>
-          {props.description}
+          <span className="view-detail-description">{props.description}</span>
         </h3>
         <h3>
           <p style={{ color: "#0b8076" }}> Total Cost : </p>${props.price}

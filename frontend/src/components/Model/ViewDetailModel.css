@@ -37,6 +37,11 @@
 .model__content p {
   display: inline;
   margin-right: 7px;
+  color: #5f5c5c;
+}
+
+.view-detail-description {
+  color: #c21989;
 }
 
 @media (min-width: 768px) {

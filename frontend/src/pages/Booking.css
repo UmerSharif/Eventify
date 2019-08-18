@@ -1,3 +1,21 @@
+.book-event-list {
+  margin-top: 1rem;
+}
+.book-event-list p {
+  display: inline;
+  margin-right: 7px;
+}
+
+.booked-event-title {
+  color: #c21989;
+}
+
+.title-wrapper {
+  text-align: center;
+}
+.title-wrapper h1 {
+  color: #c21989;
+}
 .event_list_item {
   margin: 1rem 0;
   padding: 1rem;
@@ -43,10 +61,4 @@
 .event_list_item h4 {
   color: #5f5c5c;
   margin: 0;
-}
-
-.event-owner-text {
-  color: #c21989;
-  font-weight: 900;
-  font-size: 1.2rem;
 }
