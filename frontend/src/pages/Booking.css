@@ -1,5 +1,10 @@
 .book-event-list {
   margin-top: 1rem;
+  width: 40rem;
+  max-width: 100%;
+  margin: 4rem auto;
+  list-style: none;
+  padding: 0;
 }
 .book-event-list p {
   display: inline;

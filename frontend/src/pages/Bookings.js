@@ -82,7 +82,7 @@ export default class Bookings extends Component {
         ) : (
           <div className="book-event-list">
             <div className="title-wrapper">
-              <h1>Your Booked Events</h1>
+              <h1>Your's Booked Events</h1>
             </div>
 
             {this.state.bookedEvents.map(bookEvent => (

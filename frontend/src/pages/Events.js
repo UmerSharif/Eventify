@@ -29,6 +29,8 @@ export default class Events extends Component {
     this.loadEvents = this.loadEvents.bind(this);
   }
 
+  isActive = true;
+
   componentDidMount() {
     this.loadEvents();
   }
@@ -160,8 +162,9 @@ export default class Events extends Component {
       })
       .then(resData => {
         const eventdata = resData.data.events;
-        this.setState({ events: eventdata, isLoading: false });
-        console.log(eventdata);
+        if (this.isActive) {
+          this.setState({ events: eventdata, isLoading: false });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -226,6 +229,10 @@ export default class Events extends Component {
         console.log(err);
       });
   };
+
+  componentWillUnmount() {
+    this.isActive = false;
+  }
   render() {
     // const eventList = this.state.events.map(event => {
     //   return (
