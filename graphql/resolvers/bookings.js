@@ -11,7 +11,7 @@ module.exports = {
       throw new Error("Authorization failed for getting bookings...");
     }
     try {
-      const bookings = await Booking.find();
+      const bookings = await Booking.find({ user: req.userId }); // only fetch booking belonging to this user
       return bookings.map(booking => {
         return transformBooking(booking);
       });

@@ -69,6 +69,58 @@ export default class Bookings extends Component {
         this.setState({ isLoading: false });
       });
   };
+
+  deleteBooking = bookingId => {
+    this.setState({ isLoading: true });
+    const requestBody = {
+      query: `
+          mutation {
+            cancelBooking(bookingId: "${bookingId}") {
+                _id
+                title
+          }
+        }
+        `
+    };
+
+    // create user mutation
+    const token = this.context.token;
+    fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Operation Failed.. Suck it bitch :D");
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState(prevState => {
+          const updatedBookEvent = prevState.bookedEvents.filter(
+            bookE => bookE._id !== bookingId
+          );
+
+          return { bookedEvents: updatedBookEvent };
+        });
+        this.setState({ isLoading: false });
+        // this.setState(prevState => {
+        //   const updatedBookEvent = [...prevState.bookedEvents];
+        //   updatedBookEvent.push({
+        //     _id: resData.data.bookings._id
+        //   });
+        //   return { bookedEvents: updatedBookEvent };
+        // });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ isLoading: false });
+      });
+  };
   render() {
     return (
       // <ul>
@@ -116,7 +168,11 @@ export default class Bookings extends Component {
                   </h4>
                 </div>
                 <div>
-                  <button>Cancel Booking</button>
+                  <button
+                    onClick={this.deleteBooking.bind(this, bookEvent._id)}
+                  >
+                    Cancel Booking
+                  </button>
                 </div>
               </li>
             ))}
