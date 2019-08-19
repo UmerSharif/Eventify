@@ -36,28 +36,47 @@ class Auth extends Component {
     //login query
     let requestBody = {
       query: `
-      query {
-        login(email: "${email}" , password: "${password}") {
+      query Login($email:String!, $password:String!){
+        login(email: $email , password: $password) {
           userId
           token
           tokenExpiration
         }
       }
-      `
+      `,
+      variables: {
+        email: email,
+        password: password
+      }
     };
 
     if (!this.state.isLogin) {
       requestBody = {
         query: `
-          mutation {
-            createUser(userInput: {email: "${email}", password: "${password}"}) {
+          mutation createUser($email: String!, $password: String!){
+            createUser(userInput: {email: $email , password: $password}) {
               _id
               email
             }
           }
-        `
+        `,
+        variables: {
+          email: email,
+          password: password
+        }
       };
     }
+    // proper way of passing query to graphql is above, same can be done for all other queries.
+    /* requestBody = {
+      query: `
+        mutation {
+          createUser(userInput: {email: "${email}", password: "${password}"}) {
+            _id
+            email
+          }
+        }
+      `
+    }; */
 
     // create user mutation
 

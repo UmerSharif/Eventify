@@ -72,16 +72,30 @@ export default class Bookings extends Component {
 
   deleteBooking = bookingId => {
     this.setState({ isLoading: true });
+    //correct way of passing dynamic variables to graphql
     const requestBody = {
       query: `
-          mutation {
-            cancelBooking(bookingId: "${bookingId}") {
+          mutation cancelBooking($id: ID!){
+            cancelBooking(bookingId: $id) {
                 _id
                 title
           }
         }
-        `
+        `,
+      variables: {
+        id: bookingId
+      }
     };
+    // const requestBody = {
+    //   query: `
+    //       mutation {
+    //         cancelBooking(bookingId: "${bookingId}") {
+    //             _id
+    //             title
+    //       }
+    //     }
+    //     `
+    // };
 
     // create user mutation
     const token = this.context.token;
