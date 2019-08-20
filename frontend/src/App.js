@@ -16,7 +16,8 @@ import MainNavigation from "./components/Navigation/MainNavigation";
 class App extends React.Component {
   state = {
     token: null,
-    userId: null
+    userId: null,
+    signInTextSwitchReceived: null
   };
   login = (token, userId, tokenExpiration) => {
     this.setState({ token: token, userId: userId });
@@ -24,6 +25,13 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({ token: null, userId: null });
+  };
+  // the below methods are for, when sign in clicked it shoud redirect to login page
+  signInTextSwitch = ReceivedText => {
+    this.setState({ signInTextSwitchReceived: ReceivedText });
+  };
+  resetSignInTextSwitch = () => {
+    this.setState({ signInTextSwitchReceived: null });
   };
   render() {
     return (
@@ -34,12 +42,17 @@ class App extends React.Component {
               token: this.state.token,
               userId: this.state.userId,
               login: this.login,
-              logout: this.logout
+              logout: this.logout,
+              TextFromViewDetail: this.signInTextSwitch,
+              deactivateViewDetail: this.resetSignInTextSwitch
             }}
           >
             <MainNavigation />
             <main className="main-content">
               <Switch>
+                {this.state.signInTextSwitchReceived && (
+                  <Redirect from="/events" to="/auth" exact />
+                )}
                 {!this.state.token && <Redirect from="/" to="/auth" exact />}
                 {this.state.token && <Redirect from="/" to="/auth" exact />}
                 {this.state.token && (

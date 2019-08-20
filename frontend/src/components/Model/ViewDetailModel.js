@@ -26,7 +26,10 @@ export default function ViewDetailModel(props) {
           Cancel
         </button>
 
-        <button className="btn" onClick={props.onConfirm}>
+        <button
+          className="btn"
+          onClick={props.onConfirm.bind(this, props.confirmText)}
+        >
           {props.confirmText}
         </button>
       </section>

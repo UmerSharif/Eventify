@@ -175,11 +175,6 @@ export default class Bookings extends Component {
                     <p style={{ color: "#0b8076" }}> Created at : </p>{" "}
                     {new Date(bookEvent.createdAt).toLocaleDateString()}
                   </h4>
-                  <h4>
-                    {" "}
-                    <p style={{ color: "#0b8076" }}> Updated at: </p>{" "}
-                    {new Date(bookEvent.updatedAt).toLocaleDateString()}
-                  </h4>
                 </div>
                 <div>
                   <button

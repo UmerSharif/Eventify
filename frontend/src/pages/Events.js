@@ -182,12 +182,13 @@ export default class Events extends Component {
     this.setState({ isViewDetailModel: !this.state.isViewDetailModel });
   };
 
-  bookEventHandler = () => {
+  bookEventHandler = TextFromViewDetailModel => {
     if (!this.context.token) {
       this.setState({
         selectedEventOnclick: null,
         isViewDetailModel: !this.state.isViewDetailModel
       });
+      this.context.TextFromViewDetail(TextFromViewDetailModel);
       return;
     }
     const requestBody = {
