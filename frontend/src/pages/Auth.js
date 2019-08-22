@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./AuthStyle.css";
 import AuthContext from "../context/auth-context";
+import SignUp from "../components/SignUp/SignUp";
 
 class Auth extends Component {
   static contextType = AuthContext;
@@ -109,35 +110,36 @@ class Auth extends Component {
 
   render() {
     return (
-      <form className="auth-form" onSubmit={this.submitHandler}>
-        <div className="form-control">
-          <h4>{this.state.infoText ? "Sign in" : "Sign up"}</h4>
-          {/* <label htmlFor="email">Email</label> */}
-          <input
-            type="email"
-            autoComplete="email"
-            id="email"
-            ref={this.emailEl}
-            placeholder="Enter Email"
-          />
-        </div>
-        <div className="form-control">
-          {/* <label htmlFor="password">Password</label> */}
-          <input
-            type="password"
-            autoComplete="current-password"
-            id="password"
-            ref={this.passwordEl}
-            placeholder="Enter Password"
-          />
-        </div>
-        <div className="form-action">
-          <button type="Submit">Submit</button>
-          <button type="button" onClick={this.toggleSignUp}>
-            Switch To {this.state.isLogin ? "Sign up" : "Sign in"}
-          </button>
-        </div>
-      </form>
+      // <form className="auth-form" onSubmit={this.submitHandler}>
+      //   <div className="form-control">
+      //     <h4>{this.state.infoText ? "Sign in" : "Sign up"}</h4>
+      //     {/* <label htmlFor="email">Email</label> */}
+      //     <input
+      //       type="email"
+      //       autoComplete="email"
+      //       id="email"
+      //       ref={this.emailEl}
+      //       placeholder="Enter Email"
+      //     />
+      //   </div>
+      //   <div className="form-control">
+      //     {/* <label htmlFor="password">Password</label> */}
+      //     <input
+      //       type="password"
+      //       autoComplete="current-password"
+      //       id="password"
+      //       ref={this.passwordEl}
+      //       placeholder="Enter Password"
+      //     />
+      //   </div>
+      //   <div className="form-action">
+      //     <button type="Submit">Submit</button>
+      //     <button type="button" onClick={this.toggleSignUp}>
+      //       Switch To {this.state.isLogin ? "Sign up" : "Sign in"}
+      //     </button>
+      //   </div>
+      // </form>
+      <SignUp />
     );
   }
 }
