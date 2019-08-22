@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./AuthStyle.css";
 import AuthContext from "../context/auth-context";
-import SignUp from "../components/SignUp/SignUp";
+import "../components/SignUp/SignUp.css";
 
 class Auth extends Component {
   static contextType = AuthContext;
@@ -9,7 +9,7 @@ class Auth extends Component {
     super(props);
 
     this.state = {
-      isLogin: true,
+      isLogin: false,
       infoText: true
     };
 
@@ -17,18 +17,25 @@ class Auth extends Component {
     this.passwordEl = React.createRef();
   }
 
-  toggleSignUp = () => {
-    this.setState({
-      isLogin: !this.state.isLogin,
-      infoText: !this.state.infoText
-    });
+  handleLogInAnimation = () => {
+    this.setState({ isLogin: !this.state.isLogin });
   };
+
+  handleBack = () => {
+    this.setState({ isLogin: !this.state.isLogin });
+  };
+
+  // toggleSignUp = () => {
+  //   this.setState({
+  //     isLogin: !this.state.isLogin,
+  //     infoText: !this.state.infoText
+  //   });
+  // };
 
   submitHandler = e => {
     e.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
-    // console.log(password);
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
@@ -139,7 +146,87 @@ class Auth extends Component {
       //     </button>
       //   </div>
       // </form>
-      <SignUp />
+
+      <div className="container">
+        <form
+          className={`signUp ${
+            this.state.isLogin ? "inactive-sx" : "active-sx"
+          }`}
+          onSubmit={this.submitHandler}
+        >
+          <h3 className="form__h3">Create Your Account</h3>
+          <p className="form__p">
+            Just enter your email address
+            <br />
+            and your password to join.
+          </p>
+          <input
+            className="w100"
+            type="email"
+            autoComplete="email"
+            id="email"
+            ref={this.emailEl}
+            placeholder="Enter Email"
+          />
+          <input
+            type="password"
+            autoComplete="current-password"
+            id="password"
+            ref={this.passwordEl}
+            placeholder="Enter Password"
+          />
+          {/* <input type="password" placeholder="Verify Password" required /> */}
+          <button
+            onClick={this.handleLogInAnimation}
+            className="form-btn sx log-in"
+            type="button"
+          >
+            Log In
+          </button>
+          <button className="form-btn dx" type="Submit">
+            Sign Up
+          </button>
+        </form>
+        <form
+          className={`signIn ${
+            this.state.isLogin ? "active-dx" : "inactive-dx"
+          }`}
+          onSubmit={this.submitHandler} //{`signIn ${this.state.isLogin ? `${returnClasses}` : ""}`}
+        >
+          <h3 className="form__h3">
+            Welcome
+            <br />
+            Back !
+          </h3>
+
+          <p className="form__p">Log In To Create or Book Events</p>
+
+          <input
+            type="email"
+            autoComplete="email"
+            id="emailLogin"
+            ref={this.emailEl}
+            placeholder="Enter Email"
+          />
+          <input
+            type="password"
+            autoComplete="current-password"
+            id="passwordLogin"
+            ref={this.passwordEl}
+            placeholder="Enter Password"
+          />
+          <button
+            onClick={this.handleBack}
+            className="form-btn sx back"
+            type="button"
+          >
+            Back
+          </button>
+          <button className="form-btn dx" type="Submit">
+            Log In
+          </button>
+        </form>
+      </div>
     );
   }
 }
