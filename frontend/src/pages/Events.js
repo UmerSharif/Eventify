@@ -188,7 +188,7 @@ export default class Events extends Component {
         selectedEventOnclick: null,
         isViewDetailModel: !this.state.isViewDetailModel
       });
-      this.context.TextFromViewDetail(TextFromViewDetailModel);
+      //this.context.TextFromViewDetail(TextFromViewDetailModel);
       return;
     }
     const requestBody = {

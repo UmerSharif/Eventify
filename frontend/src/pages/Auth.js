@@ -9,12 +9,15 @@ class Auth extends Component {
     super(props);
 
     this.state = {
-      isLogin: false,
+      isLogin: true,
       infoText: true
     };
 
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
+
+    this.emailElSignUp = React.createRef();
+    this.passwordElSignUp = React.createRef();
   }
 
   handleLogInAnimation = () => {
@@ -36,7 +39,7 @@ class Auth extends Component {
     e.preventDefault();
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
-
+    console.log("email is:" + email);
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
@@ -57,6 +60,75 @@ class Auth extends Component {
         password: password
       }
     };
+
+    // if (!this.state.isLogin) { // this job is now done in a seperate handler
+    //   requestBody = {
+    //     query: `
+    //       mutation createUser($email: String!, $password: String!){
+    //         createUser(userInput: {email: $email , password: $password}) {
+    //           _id
+    //           email
+    //         }
+    //       }
+    //     `,
+    //     variables: {
+    //       email: email,
+    //       password: password
+    //     }
+    //   };
+    // }
+    // proper way of passing query to graphql is above, same can be done for all other queries.
+    /* requestBody = {
+      query: `
+        mutation {
+          createUser(userInput: {email: "${email}", password: "${password}"}) {
+            _id
+            email
+          }
+        }
+      `
+    }; */
+
+    // create user mutation
+
+    fetch("http://localhost:5000/graphql", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Operation Failed.. Suck it bitch :D");
+        }
+        return res.json();
+      })
+      .then(resData => {
+        if (resData.data.login.token) {
+          this.context.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  //testing submihandler 2
+  submitHandlerSignUp = e => {
+    e.preventDefault();
+    const email = this.emailElSignUp.current.value;
+    const password = this.passwordElSignUp.current.value;
+    console.log("email is:" + email);
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      return;
+    }
+
+    let requestBody = {};
 
     if (!this.state.isLogin) {
       requestBody = {
@@ -115,6 +187,8 @@ class Auth extends Component {
       });
   };
 
+  ///submithandler 2
+
   render() {
     return (
       // <form className="auth-form" onSubmit={this.submitHandler}>
@@ -152,7 +226,7 @@ class Auth extends Component {
           className={`signUp ${
             this.state.isLogin ? "inactive-sx" : "active-sx"
           }`}
-          onSubmit={this.submitHandler}
+          onSubmit={this.submitHandlerSignUp}
         >
           <h3 className="form__h3">Create Your Account</h3>
           <p className="form__p">
@@ -161,18 +235,18 @@ class Auth extends Component {
             and your password to join.
           </p>
           <input
-            className="w100"
+            // className="w100"
             type="email"
             autoComplete="email"
             id="email"
-            ref={this.emailEl}
+            ref={this.emailElSignUp}
             placeholder="Enter Email"
           />
           <input
             type="password"
             autoComplete="current-password"
             id="password"
-            ref={this.passwordEl}
+            ref={this.passwordElSignUp}
             placeholder="Enter Password"
           />
           {/* <input type="password" placeholder="Verify Password" required /> */}

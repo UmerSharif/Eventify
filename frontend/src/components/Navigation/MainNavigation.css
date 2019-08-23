@@ -1,23 +1,50 @@
+.main-navigation-container {
+  width: 100%;
+  height: 150px;
+}
 .main-navigation {
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
-  height: 3.5rem;
+  /* height: 3.5rem; */
   background: #08878b;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+
+  /* for curve design */
+  height: 150px;
+  overflow: hidden;
+}
+
+.svg__stuff {
+  height: 100%;
+  width: 100%;
+}
+
+.path__stuff {
+  stroke: none;
+  fill: rgba(0, 0, 0, 0.25);
 }
 
 .main-navigation__logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
   margin: 0;
   font-size: 1.5rem;
 }
+
 .main-navigation__items {
   margin-left: 1.5rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+
+  /* media queries */
 }
 
 .main-navigation__items ul {
@@ -61,7 +88,8 @@
   transition: all 3s;
 }
 
-.main-navigation__logo p:hover {
+.main-navigation__logo p:hover,
+p:focus {
   font-size: 1.5rem;
   transform: rotate(1080deg);
 }

@@ -33,6 +33,7 @@ class App extends React.Component {
   resetSignInTextSwitch = () => {
     this.setState({ signInTextSwitchReceived: null });
   };
+
   render() {
     return (
       <BrowserRouter>

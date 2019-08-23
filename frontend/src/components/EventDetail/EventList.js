@@ -18,7 +18,10 @@ export default function EventList(props) {
   });
   return (
     <div>
-      <ul className="event__list">{events}</ul>
+      <ul className="event__list">
+        <h1>All Events</h1>
+        {events}
+      </ul>
     </div>
   );
 }

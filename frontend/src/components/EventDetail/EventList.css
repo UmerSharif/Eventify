@@ -1,7 +1,12 @@
 .event__list {
   width: 40rem;
   max-width: 100%;
-  margin: 4rem auto;
+  margin: 3rem auto;
   list-style: none;
   padding: 0;
+}
+
+.event__list h1 {
+  color: #c21989;
+  text-align: center;
 }
