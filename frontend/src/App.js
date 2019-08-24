@@ -7,6 +7,7 @@ import AuthPage from "./pages/Auth";
 import EventPage from "./pages/Events";
 import BookingPage from "./pages/Bookings";
 import AuthContext from "./context/auth-context";
+import "./main.scss";
 //
 
 //navnar
@@ -48,8 +49,39 @@ class App extends React.Component {
               deactivateViewDetail: this.resetSignInTextSwitch
             }}
           >
-            <MainNavigation />
-            <main className="main-content">
+            <div className="container-background ">
+              {/* testing navigation and main content */}
+              <MainNavigation />
+              <main className="main-content ">
+                <Switch>
+                  {this.state.signInTextSwitchReceived && (
+                    <Redirect from="/events" to="/auth" exact />
+                  )}
+                  {!this.state.token && <Redirect from="/" to="/auth" exact />}
+                  {this.state.token && <Redirect from="/" to="/auth" exact />}
+                  {this.state.token && (
+                    <Redirect from="/auth" to="/events" exact />
+                  )}
+                  {!this.state.token && (
+                    <Route path="/auth" component={AuthPage} />
+                  )}
+                  <Route path="/events" component={EventPage} />
+                  {this.state.token && (
+                    <Route path="/bookings" component={BookingPage} />
+                  )}
+                  {/* my change */}
+
+                  {!this.state.token && (
+                    <Redirect from="/bookings" to="/auth" exact />
+                  )}
+                </Switch>
+              </main>
+              {/* testing navigation and main content */}
+              <div className="auroral-northern" />
+              <div className="auroral-stars" />
+            </div>
+            {/* <MainNavigation />
+            <main className="main-content ">
               <Switch>
                 {this.state.signInTextSwitchReceived && (
                   <Redirect from="/events" to="/auth" exact />
@@ -65,14 +97,14 @@ class App extends React.Component {
                 <Route path="/events" component={EventPage} />
                 {this.state.token && (
                   <Route path="/bookings" component={BookingPage} />
-                )}
-                {/* my change */}
+                )} */}
+            {/* my change */}
 
-                {!this.state.token && (
+            {/* {!this.state.token && (
                   <Redirect from="/bookings" to="/auth" exact />
                 )}
               </Switch>
-            </main>
+            </main> */}
           </AuthContext.Provider>
         </React.Fragment>
       </BrowserRouter>

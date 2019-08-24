@@ -3,7 +3,7 @@
   padding: 1rem;
   border: 1px solid #b3b0b0;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
-  background: #f1eeee;
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   justify-content: space-between;
   align-items: center;
