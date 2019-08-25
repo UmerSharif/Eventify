@@ -33,17 +33,15 @@ app.use(
   })
 );
 
+const port = process.env.PORT || 5000;
+
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${
-      process.env.MONGO_PASSWORD
-    }@cluster0-hhine.mongodb.net/${
-      process.env.MONGO_DB
-    }?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-hhine.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
     { useNewUrlParser: true }
   )
   .then(() => {
-    app.listen(5000);
+    app.listen(port);
   })
   .catch(err => {
     console.log(err);
