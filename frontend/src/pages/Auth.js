@@ -91,7 +91,7 @@ class Auth extends Component {
 
     // create user mutation
 
-    fetch("http://localhost:5000/graphql", {
+    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -160,7 +160,7 @@ class Auth extends Component {
 
     // create user mutation
 
-    fetch("http://localhost:5000/graphql", {
+    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {

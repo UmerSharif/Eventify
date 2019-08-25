@@ -39,7 +39,7 @@ export default class Bookings extends Component {
 
     // create user mutation
     const token = this.context.token;
-    fetch("http://localhost:5000/graphql", {
+    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -99,7 +99,7 @@ export default class Bookings extends Component {
 
     // create user mutation
     const token = this.context.token;
-    fetch("http://localhost:5000/graphql", {
+    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
