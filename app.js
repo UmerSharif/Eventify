@@ -9,10 +9,9 @@ const graphQLSchema = require("./graphql/schema/index");
 const graphQLResolvers = require("./graphql/resolvers/index");
 const cors = require("cors");
 
-app.use(cors());
-
 const app = express();
 //const events = []; testing
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
