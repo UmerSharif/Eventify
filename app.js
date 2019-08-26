@@ -33,11 +33,24 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
+// mongoose
+//   .connect(
+//     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-hhine.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+//     { useNewUrlParser: true }
+//   )
+//   .then(() => {
+//     app.listen(port);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+//test
 mongoose
   .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-hhine.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+    "mongodb+srv://umer:RrfmjxoHNA7OMtny@cluster0-hhine.mongodb.net/my-eventdb?retryWrites=true&w=majority",
     { useNewUrlParser: true }
   )
   .then(() => {
