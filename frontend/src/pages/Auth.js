@@ -123,7 +123,6 @@ class Auth extends Component {
     e.preventDefault();
     const email = this.emailElSignUp.current.value;
     const password = this.passwordElSignUp.current.value;
-    console.log("email is:" + email);
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
