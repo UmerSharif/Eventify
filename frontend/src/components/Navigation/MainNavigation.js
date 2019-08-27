@@ -1,10 +1,10 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
-
-import AuthContext from "../../context/auth-context";
-
 import "./MainNavigation.css";
+import AuthContext from "../../context/auth-context";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import Bars from "./Bars";
 
 const MainNavigation = props => (
   <AuthContext.Consumer>
@@ -56,6 +56,12 @@ const MainNavigation = props => (
                     Events
                   </NavLink>
                 </li>
+                <FontAwesomeIcon
+                  icon="bars"
+                  size="lg"
+                  style={{ color: "beige" }}
+                  onClick={context.FromBars}
+                />
                 {context.token && (
                   <React.Fragment>
                     <li>

@@ -6,5 +6,6 @@ export default React.createContext({
   login: (token, userId, tokenExpiration) => {},
   logout: () => {},
   TextFromViewDetail: textFromView => {},
-  deactivateViewDetail: () => {}
+  deactivateViewDetail: () => {},
+  FromBars: () => {}
 });

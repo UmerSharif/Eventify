@@ -19,7 +19,8 @@ class App extends React.Component {
   state = {
     token: null,
     userId: null,
-    signInTextSwitchReceived: null
+    signInTextSwitchReceived: null,
+    isMobile: false
   };
   login = (token, userId, tokenExpiration) => {
     this.setState({ token: token, userId: userId });
@@ -27,6 +28,10 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({ token: null, userId: null });
+  };
+
+  FromBarsToggle = () => {
+    this.setState({ isMobile: !this.state.isMobile });
   };
   // the below methods are for, when sign in clicked it shoud redirect to login page
   signInTextSwitch = ReceivedText => {
@@ -47,7 +52,8 @@ class App extends React.Component {
               login: this.login,
               logout: this.logout,
               TextFromViewDetail: this.signInTextSwitch,
-              deactivateViewDetail: this.resetSignInTextSwitch
+              deactivateViewDetail: this.resetSignInTextSwitch,
+              FromBars: this.FromBarsToggle
             }}
           >
             <div className="container-background ">
