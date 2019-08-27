@@ -79,3 +79,9 @@ textarea {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
   background: #f1eeee;
 } */
+
+@media only screen and (max-width: 600px) {
+  .event-control {
+    margin: 0 auto 0 auto;
+  }
+}
