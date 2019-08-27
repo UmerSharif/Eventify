@@ -90,7 +90,7 @@ export default class Events extends Component {
 
     // create user mutation
     const token = this.context.token;
-    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
+    fetch("https://blooming-spire-94554.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -147,7 +147,7 @@ export default class Events extends Component {
 
     // create user mutation
 
-    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
+    fetch("https://blooming-spire-94554.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -206,7 +206,7 @@ export default class Events extends Component {
 
     // create user mutation
     const token = this.context.token;
-    fetch("https://frozen-shore-22367.herokuapp.com/graphql", {
+    fetch("https://blooming-spire-94554.herokuapp.com/graphql", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
