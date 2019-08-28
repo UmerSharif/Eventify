@@ -7,7 +7,7 @@ import AuthPage from "./pages/Auth";
 import EventPage from "./pages/Events";
 import BookingPage from "./pages/Bookings";
 import AuthContext from "./context/auth-context";
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 import "./main.scss";
 //
 
@@ -88,7 +88,8 @@ class App extends React.Component {
               {/* testing navigation and main content */}
               <div className="auroral-northern" />
               <div className="auroral-stars" />
-              <Footer />
+              {/* <Footer /> */}
+              <h3 className="name-tag">by @Umer</h3>
             </div>
             {/* <MainNavigation />
             <main className="main-content ">

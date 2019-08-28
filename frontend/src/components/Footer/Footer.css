@@ -23,12 +23,100 @@
   fill: #0b8076d6;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
   .footer__div {
     height: 150px;
     overflow: hidden;
     position: absolute;
     width: 100%;
-    top: 672px;
+    top: 38.8rem;
   }
 }
+@media only screen and (min-width: 321px) and (max-width: 640px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 38.8rem;
+  }
+}
+@media only screen and (min-width: 641px) and (max-width: 960px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 38.8rem;
+  }
+}
+@media only screen and (min-width: 961px) and (max-width: 1024px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 38.8rem;
+  }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+  /* big landscape tablets, laptops, and desktops */
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 38.8rem;
+  }
+}
+@media (max-width: 1281px) {
+  /* hi-res laptops and desktops */
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 38.8rem;
+  }
+}
+
+/* @media only screen and (max-width: 600px) {
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 678px;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 678px;
+  }
+}
+@media only screen and (min-width: 1409px) {
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 761px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .footer__div {
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 942px;
+  }
+} */

@@ -7,3 +7,10 @@
     margin: 0 2.5rem;
   }
 }
+
+.name-tag {
+  color: beige;
+  position: absolute;
+  right: 6%;
+  bottom: 6%;
+}
