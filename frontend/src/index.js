@@ -6,9 +6,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faCheckSquare,
   faCoffee,
-  faBars
+  faBars,
+  faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faCheckSquare, faCoffee, faBars);
+library.add(faCheckSquare, faCoffee, faBars, faTimesCircle);
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

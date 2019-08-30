@@ -120,7 +120,14 @@ p:focus {
     background: #21696f;
     z-index: 999;
     display: flex;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
   }
+
+  .main-navigation__items__mobile.open {
+    transform: translateX(0);
+  }
+
   .main-navigation__items__mobile ul {
     width: 70%;
     margin: auto;
@@ -145,12 +152,34 @@ p:focus {
 
   .burger__bars {
     cursor: pointer;
+    font-size: 2rem;
     display: block;
     color: beige;
     position: absolute;
     right: 1.5rem;
     top: 1.5rem;
     z-index: 9999;
+    transition: all 0.2s;
+  }
+  .burger__bars:hover {
+    /* font-size: 2rem; */
+    transform: scale(1.5, 1.5);
+  }
+
+  .times-circle {
+    cursor: pointer;
+    font-size: 2rem;
+    display: block;
+    color: beige;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    z-index: 9999;
+    transition: all 0.2s;
+  }
+  .times-circle:hover {
+    /* font-size: 2rem; */
+    transform: scale(1.5, 1.5);
   }
 
   .main-navigation__items__mobile ul li button {

@@ -79,10 +79,15 @@ const MainNavigation = props => (
           <div className="bar__container">
             <nav
               className={
-                context.isVisibleToBars
+                !context.isVisibleToBars
                   ? "main-navigation__items__mobile"
-                  : "main-navigation__items__mobile_hidden"
+                  : "main-navigation__items__mobile open"
               }
+              // className={
+              //   context.isVisibleToBars
+              //     ? "main-navigation__items__mobile"
+              //     : "main-navigation__items__mobile_hidden"
+              // }
             >
               <ul>
                 {!context.token && (
@@ -108,12 +113,21 @@ const MainNavigation = props => (
                 )}
               </ul>
             </nav>
-            <FontAwesomeIcon
-              icon="bars"
-              size="lg"
-              className="burger__bars"
-              onClick={context.FromBars}
-            />
+            {!context.isVisibleToBars ? (
+              <FontAwesomeIcon
+                icon="bars"
+                size="lg"
+                className="burger__bars"
+                onClick={context.FromBars}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon="times-circle"
+                size="lg"
+                className="times-circle"
+                onClick={context.TimesCircle}
+              />
+            )}
           </div>
           {/* for mobile */}
         </React.Fragment>

@@ -33,6 +33,11 @@ class App extends React.Component {
   FromBarsToggle = () => {
     this.setState({ isVisible: !this.state.isVisible });
   };
+
+  FromTimesCircle = () => {
+    this.setState({ isVisible: !this.state.isVisible });
+  };
+
   // the below methods are for, when sign in clicked it shoud redirect to login page
   signInTextSwitch = ReceivedText => {
     this.setState({ signInTextSwitchReceived: ReceivedText });
@@ -54,7 +59,8 @@ class App extends React.Component {
               TextFromViewDetail: this.signInTextSwitch,
               deactivateViewDetail: this.resetSignInTextSwitch,
               FromBars: this.FromBarsToggle,
-              isVisibleToBars: this.state.isVisible
+              isVisibleToBars: this.state.isVisible,
+              TimesCircle: this.FromTimesCircle
             }}
           >
             <div className="container-background ">
